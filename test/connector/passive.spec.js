@@ -28,7 +28,7 @@ describe('Connector - Passive //', function () {
     passive = new PassiveConnector(mockConnection);
   });
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
 
     sandbox.spy(mockConnection, 'reply');
     sandbox.spy(mockConnection, 'close');

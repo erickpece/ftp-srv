@@ -19,7 +19,7 @@ describe('Connector - Active //', function () {
     active = new ActiveConnector(mockConnection);
   });
   beforeEach(done => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
 
     findPort()
     .then(port => {
