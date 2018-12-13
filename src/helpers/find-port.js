@@ -16,11 +16,19 @@ module.exports = function (min = 1, max = undefined) {
       }
     });
     portCheckServer.on('listening', () => {
-      const {port} = portCheckServer.address();
-      portCheckServer.close(() => {
-        portCheckServer = null;
-        resolve(port);
-      });
+      const address = portCheckServer.address();
+
+      if (address !== null) {
+        portCheckServer.close(() => {
+          portCheckServer = null;
+          resolve(address.port);
+        });
+      } else {
+        portCheckServer.close(() => {
+          portCheckServer = null;
+          resolve();
+        });
+      }
     });
     portCheckServer.listen(checkPort);
   });
